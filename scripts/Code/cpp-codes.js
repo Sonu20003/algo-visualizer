@@ -258,7 +258,97 @@ void dfs(int node, vector<vector<int>>& adjList, vector<bool>& visited) {
     }
 }`;
 
+const naiveCpp = `// Naive String Matching Algorithm in C++
+#include <iostream>
+#include <string>
+using namespace std;
 
+void naiveSearch(string text, string pattern) {
+    int n = text.size();
+    int m = pattern.size();
+    
+    for (int i = 0; i <= n - m; i++) {
+        int j;
+        for (j = 0; j < m; j++) {
+            if (text[i + j] != pattern[j]) {
+                break;
+            }
+        }
+        if (j == m) {
+            cout << "Pattern found at index " << i << endl;
+        }
+    }
+}`;
+
+const kmpCpp = `// KMP Algorithm in C++
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void computeLPS(string pattern, vector<int>& lps) {
+    int len = 0, i = 1;
+    lps[0] = 0;
+    while (i < pattern.size()) {
+        if (pattern[i] == pattern[len]) {
+            lps[i++] = ++len;
+        } else if (len) {
+            len = lps[len - 1];
+        } else {
+            lps[i++] = 0;
+        }
+    }
+}
+
+void KMPSearch(string text, string pattern) {
+    int n = text.size(), m = pattern.size();
+    vector<int> lps(m);
+    computeLPS(pattern, lps);
+    int i = 0, j = 0;
+    while (i < n) {
+        if (text[i] == pattern[j]) {
+            i++, j++;
+        }
+        if (j == m) {
+            cout << "Pattern found at index " << i - j << endl;
+            j = lps[j - 1];
+        } else if (i < n && text[i] != pattern[j]) {
+            j ? j = lps[j - 1] : i++;
+        }
+    }
+}`;
+
+const rabinKarpCpp = `// Rabin-Karp Algorithm in C++
+#include <iostream>
+using namespace std;
+
+#define d 256
+#define q 101
+
+void rabinKarp(string text, string pattern) {
+    int n = text.size(), m = pattern.size();
+    int h = 1, p = 0, t = 0;
+    for (int i = 0; i < m - 1; i++) h = (h * d) % q;
+    for (int i = 0; i < m; i++) {
+        p = (d * p + pattern[i]) % q;
+        t = (d * t + text[i]) % q;
+    }
+    for (int i = 0; i <= n - m; i++) {
+        if (p == t) {
+            bool match = true;
+            for (int j = 0; j < m; j++) {
+                if (text[i + j] != pattern[j]) {
+                    match = false;
+                    break;
+                }
+            }
+            if (match) cout << "Pattern found at index " << i << endl;
+        }
+        if (i < n - m) {
+            t = (d * (t - text[i] * h) + text[i + m]) % q;
+            if (t < 0) t += q;
+        }
+    }
+}`;
 
 export {
     binarySearchCpp,
@@ -272,5 +362,8 @@ export {
     dijkstraCpp,
     aStarCpp,
     bfsCppList,
-    dfsCppList
+    dfsCppList,
+    naiveCpp,
+    kmpCpp,
+    rabinKarpCpp,
 };

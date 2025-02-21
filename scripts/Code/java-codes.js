@@ -236,6 +236,104 @@ class Graph {
     }
 }`;
 
+const naiveJava = `// Naive String Matching Algorithm in Java
+class NaiveStringMatching {
+    static void naiveSearch(String text, String pattern) {
+        int n = text.length(), m = pattern.length();
+        for (int i = 0; i <= n - m; i++) {
+            int j;
+            for (j = 0; j < m; j++) {
+                if (text.charAt(i + j) != pattern.charAt(j)) {
+                    break;
+                }
+            }
+            if (j == m) {
+                System.out.println("Pattern found at index " + i);
+            }
+        }
+    }
+    public static void main(String[] args) {
+        String text = "ABABABABABAB";
+        String pattern = "ABA";
+        naiveSearch(text, pattern);
+    }
+}`;
+
+const kmpJava = `// KMP Algorithm in Java
+class KMPStringMatching {
+    static void computeLPS(String pattern, int[] lps) {
+        int len = 0, i = 1;
+        lps[0] = 0;
+        while (i < pattern.length()) {
+            if (pattern.charAt(i) == pattern.charAt(len)) {
+                lps[i++] = ++len;
+            } else if (len > 0) {
+                len = lps[len - 1];
+            } else {
+                lps[i++] = 0;
+            }
+        }
+    }
+    static void KMPSearch(String text, String pattern) {
+        int n = text.length(), m = pattern.length();
+        int[] lps = new int[m];
+        computeLPS(pattern, lps);
+        int i = 0, j = 0;
+        while (i < n) {
+            if (text.charAt(i) == pattern.charAt(j)) {
+                i++; j++;
+            }
+            if (j == m) {
+                System.out.println("Pattern found at index " + (i - j));
+                j = lps[j - 1];
+            } else if (i < n && text.charAt(i) != pattern.charAt(j)) {
+                j = (j > 0) ? lps[j - 1] : i + 1;
+            }
+        }
+    }
+    public static void main(String[] args) {
+        String text = "ABABDABACDABABCABAB";
+        String pattern = "ABABCABAB";
+        KMPSearch(text, pattern);
+    }
+}`;
+
+const rabinKarpJava = `// Rabin-Karp Algorithm in Java
+class RabinKarpStringMatching {
+    static final int d = 256;
+    static final int q = 101;
+    static void rabinKarp(String text, String pattern) {
+        int n = text.length(), m = pattern.length();
+        int h = 1, p = 0, t = 0;
+        for (int i = 0; i < m - 1; i++) h = (h * d) % q;
+        for (int i = 0; i < m; i++) {
+            p = (d * p + pattern.charAt(i)) % q;
+            t = (d * t + text.charAt(i)) % q;
+        }
+        for (int i = 0; i <= n - m; i++) {
+            if (p == t) {
+                boolean match = true;
+                for (int j = 0; j < m; j++) {
+                    if (text.charAt(i + j) != pattern.charAt(j)) {
+                        match = false;
+                        break;
+                    }
+                }
+                if (match) System.out.println("Pattern found at index " + i);
+            }
+            if (i < n - m) {
+                t = (d * (t - text.charAt(i) * h) + text.charAt(i + m)) % q;
+                if (t < 0) t += q;
+            }
+        }
+    }
+    public static void main(String[] args) {
+        String text = "GEEKS FOR GEEKS";
+        String pattern = "GEEK";
+        rabinKarp(text, pattern);
+    }
+}`;
+
 
 export {
     binarySearchJava,
@@ -249,6 +347,9 @@ export {
     dijkstraJava,
     aStarJava,
     bfsJavaList,
-    dfsJavaList
+    dfsJavaList,
+    naiveJava,
+    kmpJava,
+    rabinKarpJava,
 };
 

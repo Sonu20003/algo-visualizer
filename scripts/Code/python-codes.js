@@ -187,6 +187,65 @@ def dfs(node, adj_list, visited):
             dfs(neighbor, adj_list, visited)
 `;
 
+const naivePython = `# Naive String Matching Algorithm in Python
+def naive_search(text, pattern):
+    n, m = len(text), len(pattern)
+    for i in range(n - m + 1):
+        if text[i:i+m] == pattern:
+            print(f"Pattern found at index {i}")
+`;
+
+const kmpPython = `# KMP Algorithm in Python
+def compute_lps(pattern):
+    lps = [0] * len(pattern)
+    length, i = 0, 1
+    while i < len(pattern):
+        if pattern[i] == pattern[length]:
+            length += 1
+            lps[i] = length
+            i += 1
+        elif length:
+            length = lps[length - 1]
+        else:
+            lps[i] = 0
+            i += 1
+    return lps
+
+def kmp_search(text, pattern):
+    n, m = len(text), len(pattern)
+    lps = compute_lps(pattern)
+    i, j = 0, 0
+    while i < n:
+        if text[i] == pattern[j]:
+            i += 1
+            j += 1
+        if j == m:
+            print(f"Pattern found at index {i - j}")
+            j = lps[j - 1]
+        elif i < n and text[i] != pattern[j]:
+            j = lps[j - 1] if j else i + 1
+`;
+
+const rabinKarpPython = `# Rabin-Karp Algorithm in Python
+d = 256
+q = 101
+
+def rabin_karp(text, pattern):
+    n, m = len(text), len(pattern)
+    h = pow(d, m-1) % q
+    p, t = 0, 0
+    for i in range(m):
+        p = (d * p + ord(pattern[i])) % q
+        t = (d * t + ord(text[i])) % q
+    for i in range(n - m + 1):
+        if p == t and text[i:i+m] == pattern:
+            print(f"Pattern found at index {i}")
+        if i < n - m:
+            t = (d * (t - ord(text[i]) * h) + ord(text[i + m])) % q
+            if t < 0:
+                t += q
+`;
+
 export {
     binarySearchPython,
     linearSearchPython,
@@ -199,5 +258,8 @@ export {
     dijkstraPython,
     aStarPython,
     bfsPythonList,
-    dfsPythonList
+    dfsPythonList,
+    naivePython,
+    kmpPython,
+    rabinKarpPython,
 };

@@ -14,9 +14,9 @@
     <input type="text" id="textInput" placeholder="ENTER MAIN TEXT">
     <input type="text" id="patternInput" placeholder="ENTER PATTERN">
     <div class="algorithm-selector">
-      <button onclick="selectAlgorithm('naive')">Naive</button>
-      <button onclick="selectAlgorithm('kmp')">KMP</button>
-      <button onclick="selectAlgorithm('rabin-karp')">Rabin-Karp</button>
+      <button onclick="selectAlgorithm('naive')" id="naive">Naive</button>
+      <button onclick="selectAlgorithm('kmp')" id="kmp">KMP</button>
+      <button onclick="selectAlgorithm('rabin-karp')" id="rabin-karp">Rabin-Karp</button>
     </div>
     <button onclick="visualize()" style="border-color: var(--neon-green); color: var(--neon-green);">ANALYZE</button>
   </div>
@@ -48,19 +48,20 @@
 
     <div class="code-blocks">
       <div class="code-block active" id="cpp">
-        <pre><code class="language-cpp"></code></pre>
+        <pre><code class="language-cpp" id="cpp-code"></code></pre>
       </div>
 
       <div class="code-block" id="python">
-        <pre><code class="language-python"></code></pre>
+        <pre><code class="language-python" id="python-code"></code></pre>
       </div>
 
       <div class="code-block" id="java">
-        <pre><code class="language-java"></code></pre>
+        <pre><code class="language-java" id="java-code"></code></pre>
       </div>
     </div>
   </div>
 </div>
+<script type="module" src="scripts/Code/code-updating-scripts/stringMatching-code-script.js"></script>
 <script src="scripts/Code/cloudfare-script.js"></script>
 <script src="scripts/Code/code-script.js"></script>
 <script src="scripts/StringMatching/stringMatch.js">
