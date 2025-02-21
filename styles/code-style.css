@@ -1,0 +1,120 @@
+.code-floater {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 18px;
+    background: white;
+    color: #666;
+    border: 1px solid #ddd;
+    border-radius: 24px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    font-family: system-ui, sans-serif;
+    z-index: 1000;
+}
+
+.code-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    display: none;
+    max-width: 800px;
+    min-width: 800px;
+    max-height: 600px;
+    min-height: 600px;
+    z-index: 1001;
+}
+
+.code-modal.visible {
+    display: block;
+}
+
+.code-content {
+    padding: 24px;
+    position: relative;
+}
+
+.lang-selector {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 12px;
+}
+
+.lang-btn {
+    background: transparent;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-family: system-ui, sans-serif;
+    transition: all 0.2s;
+}
+
+.lang-btn.active {
+    color: #333;
+    font-weight: 500;
+    background: rgba(0,0,0,0.05);
+}
+
+.code-blocks {
+    max-height: 60vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #e0e0e0 transparent;
+}
+
+.code-blocks::-webkit-scrollbar {
+    width: 6px;
+}
+
+.code-blocks::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.code-blocks::-webkit-scrollbar-thumb {
+    background: #e0e0e0;
+    border-radius: 3px;
+}
+
+.code-block {
+    display: none;
+}
+
+.code-block.active {
+    display: block;
+}
+
+pre[class*="language-"] {
+    margin: 0;
+    background: #fafafa;
+    border-radius: 4px;
+    padding: 16px !important;
+}
+
+.code-controls {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    gap: 8px;
+}
+
+.code-controls button {
+    background: transparent;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 4px;
+    transition: all 0.2s;
+    font-family: system-ui, sans-serif;
+    font-size: 14px;
+}

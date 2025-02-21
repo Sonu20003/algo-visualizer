@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b6776bac-c682-4696-897e-0e476c6fd643" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="CSS File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2mmiZbvjn0lYfXR5W7ugD0KiOuG" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;JavaScript Debug.index.html.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/sonu1/OneDrive/Desktop/algo Project&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\sonu1\OneDrive\Desktop\algo Project\scripts\Code\code-updating-scripts" />
+      <recent name="C:\Users\sonu1\OneDrive\Desktop\algo Project\scripts\sorting" />
+      <recent name="C:\Users\sonu1\OneDrive\Desktop\algo Project\scripts\pathFinder(matrix)" />
+      <recent name="C:\Users\sonu1\OneDrive\Desktop\algo Project\scripts\search" />
+      <recent name="C:\Users\sonu1\OneDrive\Desktop\algo Project\scripts\pathFinder(edges&amp;nodes)" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-76f8388c3a79-JavaScript-WS-243.24978.60" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b6776bac-c682-4696-897e-0e476c6fd643" name="Changes" comment="" />
+      <created>1727688208230</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1727688208230</updated>
+      <workItem from="1727688209355" duration="163000" />
+      <workItem from="1727852558846" duration="18000" />
+      <workItem from="1728639914194" duration="1333000" />
+      <workItem from="1728650551172" duration="20000" />
+      <workItem from="1733335603971" duration="4487000" />
+      <workItem from="1733547783280" duration="66000" />
+      <workItem from="1733549393904" duration="50000" />
+      <workItem from="1733556689357" duration="810000" />
+      <workItem from="1733558387503" duration="2083000" />
+      <workItem from="1733562507646" duration="3870000" />
+      <workItem from="1733573472172" duration="2162000" />
+      <workItem from="1733576008082" duration="2516000" />
+      <workItem from="1733578954588" duration="201000" />
+      <workItem from="1733579158260" duration="23000" />
+      <workItem from="1733579218779" duration="866000" />
+      <workItem from="1733592202928" duration="85000" />
+      <workItem from="1733631975984" duration="376000" />
+      <workItem from="1733632378431" duration="19000" />
+      <workItem from="1733645660876" duration="3364000" />
+      <workItem from="1733676252793" duration="319000" />
+      <workItem from="1733682578201" duration="293000" />
+      <workItem from="1733716160603" duration="405000" />
+      <workItem from="1733721727494" duration="289000" />
+      <workItem from="1733722282215" duration="769000" />
+      <workItem from="1733726656050" duration="302000" />
+      <workItem from="1733759200566" duration="400000" />
+      <workItem from="1733908952705" duration="73000" />
+      <workItem from="1733934019051" duration="749000" />
+      <workItem from="1734155629473" duration="182000" />
+      <workItem from="1734939796921" duration="558000" />
+      <workItem from="1735237242941" duration="2381000" />
+      <workItem from="1735317832049" duration="11186000" />
+      <workItem from="1735373518247" duration="1983000" />
+      <workItem from="1735388394364" duration="155000" />
+      <workItem from="1735414205240" duration="4389000" />
+      <workItem from="1735493885293" duration="1349000" />
+      <workItem from="1735748779261" duration="1864000" />
+      <workItem from="1736563026319" duration="188000" />
+      <workItem from="1737818701600" duration="21000" />
+      <workItem from="1737963003103" duration="202000" />
+      <workItem from="1738218646718" duration="624000" />
+      <workItem from="1739265035156" duration="331000" />
+      <workItem from="1739272434426" duration="918000" />
+      <workItem from="1739342208866" duration="4000" />
+      <workItem from="1739344058646" duration="142000" />
+      <workItem from="1739513173209" duration="167000" />
+      <workItem from="1739553916219" duration="5762000" />
+      <workItem from="1739560288416" duration="5968000" />
+      <workItem from="1739603100230" duration="6470000" />
+      <workItem from="1739621938393" duration="1066000" />
+      <workItem from="1739670539847" duration="29000" />
+      <workItem from="1739670610971" duration="2461000" />
+      <workItem from="1739686757741" duration="1597000" />
+      <workItem from="1739689538316" duration="1240000" />
+      <workItem from="1739709591702" duration="14585000" />
+      <workItem from="1739764814663" duration="679000" />
+      <workItem from="1739770781391" duration="910000" />
+      <workItem from="1739772497774" duration="5483000" />
+      <workItem from="1739786199635" duration="2429000" />
+      <workItem from="1739801986822" duration="1040000" />
+      <workItem from="1739862429381" duration="4593000" />
+      <workItem from="1739875066624" duration="68000" />
+      <workItem from="1739875173095" duration="115000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

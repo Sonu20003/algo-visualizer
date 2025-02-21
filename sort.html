@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visualizer</title>
+  <link rel="stylesheet" href="styles/visualizer.css">
+  <link rel="stylesheet" href="styles/header.css">
+  <link rel="stylesheet" href="styles/code-style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" rel="stylesheet" />
+
+</head>
+<body>
+
+<header>
+  <div class="header-blocks" id="title">
+    <p>Algorithms Visualizer !</p>
+  </div>
+
+  <div class="header-blocks dropdown">
+    <button class="display-buttons" id="dropdown-toggle">
+      Algorithms ▼
+    </button>
+    <div id="dropdown-content">
+      <button class="list-buttons" id="bubble_sort">Bubble Sort</button>
+      <button class="list-buttons" id="selection_sort">Selection Sort</button>
+      <button class="list-buttons" id="insertion_sort">Insertion Sort</button>
+      <button class="list-buttons" id="merge_sort">Merge Sort</button>
+    </div>
+  </div>
+
+  <div class="header-blocks">
+    <button class="display-buttons" id="visualise">Visualise</button>
+  </div>
+  <div class="header-blocks">
+    <button class="display-buttons" id="clear">clear board</button>
+  </div>
+  <div class="header-blocks dropdown">
+    <button class="display-buttons" id="dropdown-toggle-speed">
+      Speed ▼
+    </button>
+    <div id="dropdown-content-speed">
+      <button class="list-buttons" id="slow">Slow</button>
+      <button class="list-buttons" id="average">Average</button>
+      <button class="list-buttons" id="fast">Fast</button>
+
+    </div>
+  </div>
+  <div class="header-blocks">
+    <button class="display-buttons" id="back">back</button>
+  </div>
+</header>
+
+<div id="message-box">
+</div>
+<div id="container">
+
+</div>
+
+
+<!--Hidden code container -->
+<button class="code-floater">View Code</button>
+<div class="code-modal">
+  <div class="code-content">
+    <div class="code-controls">
+      <button class="copy-btn" onclick="copyCode(this)" id="copy-button">Copy</button>
+      <button onclick="closeCode()" id="close-button">X</button>
+    </div>
+
+    <div class="lang-selector">
+      <button class="lang-btn active" data-lang="cpp">C++</button>
+      <button class="lang-btn" data-lang="python">Python</button>
+      <button class="lang-btn" data-lang="java">Java</button>
+    </div>
+
+    <div class="code-blocks">
+      <div class="code-block active" id="cpp">
+        <pre><code class="language-cpp" id="cpp-code"></code></pre>
+      </div>
+
+      <div class="code-block" id="python">
+        <pre><code class="language-python" id="python-code"></code></pre>
+      </div>
+
+      <div class="code-block" id="java">
+        <pre><code class="language-java" id="java-code"></code></pre>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="module" src="scripts/Code/code-updating-scripts/sort-code-script.js"></script>
+<script src="scripts/Code/cloudfare-script.js"></script>
+<script src="scripts/Code/code-script.js"></script>
+<script type="module" src="scripts/sorting/visualizer.js"></script>
+<script type="module" src="scripts/sorting/header_sort.js"></script>
+</body>
+</html>

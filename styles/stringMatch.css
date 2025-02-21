@@ -1,0 +1,209 @@
+:root {
+    --neon-cyan: #0ff;
+    --neon-pink: #f0f;
+    --neon-green: #0f0;
+    --dark-bg: #0a0a12;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background: linear-gradient(45deg, #0a0a12, #1a1a2f);
+    color: var(--neon-cyan);
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.input-section {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 2rem;
+    border-radius: 8px;
+    border: 2px solid var(--neon-cyan);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    margin-bottom: 2rem;
+}
+
+input[type="text"] {
+    background: transparent;
+    border: 1px solid var(--neon-cyan);
+    color: var(--neon-cyan);
+    padding: 12px;
+    font-size: 1.2rem;
+    margin: 10px 0;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    box-shadow: 0 0 15px var(--neon-cyan);
+}
+
+.algorithm-selector {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 20px 0;
+}
+
+button {
+    background: #1a1a2f;
+    border: 2px solid var(--neon-pink);
+    color: var(--neon-pink);
+    padding: 15px 25px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+}
+
+button:hover {
+    background: var(--neon-pink);
+    color: #000;
+    box-shadow: 0 0 25px var(--neon-pink);
+    transform: translateY(-2px);
+}
+
+button.active {
+    background: var(--neon-pink);
+    color: #000;
+    border-color: #fff;
+}
+
+.visualization {
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid var(--neon-green);
+    border-radius: 8px;
+    padding: 2rem;
+    margin-top: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.visualization::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(0, 255, 255, 0.1),
+            transparent
+    );
+    animation: scan 6s infinite;
+}
+
+@keyframes scan {
+    0% { left: -100% }
+    100% { left: 100% }
+}
+
+.text-display, .pattern-display-block {
+    font-size: 1.5rem;
+    letter-spacing: 3px;
+    margin: 2rem 0;
+    position: relative;
+    padding: 20px;
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    display: inline-block;
+}
+
+.pattern-display-block {
+    border-color: var(--neon-pink);
+    margin-left: 2rem;
+}
+
+.char-box {
+    display: inline-block;
+    min-width: 30px;
+    text-align: center;
+    margin: 2px;
+    padding: 5px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.char-box::after {
+    content: attr(data-index);
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    color: var(--neon-cyan);
+}
+
+.highlight {
+    animation: pulse 0.5s ease;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.current {
+    background: var(--neon-cyan);
+    color: #000;
+    box-shadow: 0 0 15px var(--neon-cyan);
+}
+
+.pattern-current {
+    background: var(--neon-pink);
+    color: #000;
+    box-shadow: 0 0 15px var(--neon-pink);
+}
+
+.match {
+    background: var(--neon-green);
+    color: #000;
+    box-shadow: 0 0 15px var(--neon-green);
+}
+
+.explanation {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    margin-top: 20px;
+    border-left: 4px solid var(--neon-pink);
+    font-size: 1.1rem;
+    line-height: 1.5;
+    position: relative;
+}
+
+.explanation::after {
+    content: '▶';
+    position: absolute;
+    left: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--neon-pink);
+}
+
+.hash-display {
+    color: var(--neon-green);
+    animation: glow 1s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 5px var(--neon-green); }
+    to { text-shadow: 0 0 15px var(--neon-green); }
+}
+
+.comparison-container {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}

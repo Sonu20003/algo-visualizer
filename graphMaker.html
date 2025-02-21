@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph Algorithm Visualizer</title>
+    <link rel="stylesheet" href="styles/PFedges.css">
+    <link rel="stylesheet" href="styles/code-style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" rel="stylesheet" />
+
+</head>
+<body>
+<div class="container">
+    <div class="controls">
+        <p>Path Finder</p>
+        <button onclick="toggleMode('addNode')" id="addNodeBtn">➕ Add Node</button>
+        <button onclick="toggleMode('addEdge')" id="addEdgeBtn">🔗 Add Edge</button>
+        <button onclick="toggleMode('remove')" id="removeBtn">❌ Remove Node</button>
+        <button onclick="startAlgorithm('bfs')" style="background: #62d51b">🌀 Run BFS</button>
+        <button onclick="startAlgorithm('dfs')" style="background: #f59e0b">🌊 Run DFS</button>
+        <button onclick="clearGraph()" style="background: transparent">♻️ Clear All</button>
+        <div id="status">Status: Ready</div>
+    </div>
+
+    <div id="canvas" onclick="handleCanvasClick(event)"></div>
+
+    <div class="algorithm-panel">
+        <div class="buffer-container">
+            <div class="buffer-title" id="bufferTitle">Queue/Stack</div>
+            <div class="buffer-content" id="bufferContent"></div>
+        </div>
+        <div class="buffer-container">
+            <div class="buffer-title">Visited Nodes</div>
+            <div class="buffer-content" id="visitedBuffer"></div>
+        </div>
+    </div>
+</div>
+
+<!--Hidden code container -->
+<button class="code-floater">View Code</button>
+<div class="code-modal">
+    <div class="code-content">
+        <div class="code-controls">
+            <button class="copy-btn" onclick="copyCode(this)" id="copy-button">Copy</button>
+            <button onclick="closeCode()" id="close-button">X</button>
+        </div>
+
+        <div class="lang-selector">
+            <button class="lang-btn active" data-lang="cpp">C++</button>
+            <button class="lang-btn" data-lang="python">Python</button>
+            <button class="lang-btn" data-lang="java">Java</button>
+        </div>
+
+        <div class="code-blocks">
+            <div class="code-block active" id="cpp">
+                <pre><code class="language-cpp"></code></pre>
+            </div>
+
+            <div class="code-block" id="python">
+                <pre><code class="language-python"></code></pre>
+            </div>
+
+            <div class="code-block" id="java">
+                <pre><code class="language-java"></code></pre>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="scripts/Code/cloudfare-script.js"></script>
+<script src="scripts/Code/code-script.js"></script>
+<script src="scripts/pathFinder(edges&nodes)/pathFinderComputer.js">
+
+</script>
+</body>
+</html>

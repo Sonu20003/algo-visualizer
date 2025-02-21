@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2D Ray Casting Demo</title>
+    <style>
+        body { margin: 0; overflow: hidden; background: black; }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    class Boundary {
+        constructor(x1, y1, x2, y2) {
+            this.x1 = x1; this.y1 = y1;
+            this.x2 = x2; this.y2 = y2;
+        }
+
+        draw() {
+            ctx.strokeStyle = "white";
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(this.x1, this.y1);
+            ctx.lineTo(this.x2, this.y2);
+            ctx.stroke();
+        }
+    }
+
+    class Ray {
+        constructor(x, y, angle) {
+            this.pos = { x, y };
+            this.dir = { x: Math.cos(angle), y: Math.sin(angle) };
+        }
+
+        cast(wall) {
+            const x1 = wall.x1, y1 = wall.y1, x2 = wall.x2, y2 = wall.y2;
+            const x3 = this.pos.x, y3 = this.pos.y;
+            const x4 = this.pos.x + this.dir.x, y4 = this.pos.y + this.dir.y;
+
+            const denom = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
+            if (denom === 0) return null;
+
+            const t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) / denom;
+            const u = -((x1 - x2) * (y1 - y3) - (y1 - y2) * (x1 - x3)) / denom;
+
+            if (t > 0 && t < 1 && u > 0) {
+                return {
+                    x: x1 + t * (x2 - x1),
+                    y: y1 + t * (y2 - y1),
+                };
+            }
+            return null;
+        }
+
+        draw(walls) {
+            let closest = null;
+            let minDist = Infinity;
+
+            for (let wall of walls) {
+                const pt = this.cast(wall);
+                if (pt) {
+                    const d = Math.hypot(pt.x - this.pos.x, pt.y - this.pos.y);
+                    if (d < minDist) {
+                        minDist = d;
+                        closest = pt;
+                    }
+                }
+            }
+
+            if (closest) {
+                ctx.strokeStyle = "yellow";
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(this.pos.x, this.pos.y);
+                ctx.lineTo(closest.x, closest.y);
+                ctx.stroke();
+            }
+        }
+    }
+
+    class RaySource {
+        constructor(x, y, numRays = 360) {
+            this.pos = { x, y };
+            this.rays = [];
+            for (let i = 0; i < numRays; i++) {
+                this.rays.push(new Ray(x, y, (i * Math.PI * 2) / numRays));
+            }
+        }
+
+        update(x, y) {
+            this.pos.x = x;
+            this.pos.y = y;
+            this.rays.forEach(ray => {
+                ray.pos.x = x;
+                ray.pos.y = y;
+            });
+        }
+
+        draw(walls) {
+            for (let ray of this.rays) {
+                ray.draw(walls);
+            }
+        }
+    }
+
+    const walls = [
+        new Boundary(100, 100, 500, 100),
+        new Boundary(500, 100, 500, 500),
+        new Boundary(500, 500, 100, 500),
+        new Boundary(100, 500, 100, 100),
+        new Boundary(250, 150, 400, 300),
+        new Boundary(150, 350, 350, 450),
+    ];
+
+    const lightSource = new RaySource(canvas.width / 2, canvas.height / 2);
+
+    window.addEventListener("mousemove", (e) => {
+        lightSource.update(e.clientX, e.clientY);
+    });
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        walls.forEach(wall => wall.draw());
+        lightSource.draw(walls);
+        requestAnimationFrame(animate);
+    }
+    animate();
+</script>
+</body>
+</html>
