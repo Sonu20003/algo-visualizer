@@ -92,6 +92,100 @@ def merge_sort(arr):
     return arr
 `;
 
+const bfsPython = `# BFS implementation using adjacency matrix
+def bfs(start, adj_matrix):
+    visited = [False] * len(adj_matrix)
+    queue = [start]
+    visited[start] = True
+    
+    while queue:
+        node = queue.pop(0)
+        print(node, end=" ")
+        
+        for i in range(len(adj_matrix[node])):
+            if adj_matrix[node][i] and not visited[i]:
+                visited[i] = True
+                queue.append(i)
+`;
+
+const dfsPython = `# DFS implementation using adjacency matrix
+def dfs(node, adj_matrix, visited):
+    visited[node] = True
+    print(node, end=" ")
+    
+    for i in range(len(adj_matrix[node])):
+        if adj_matrix[node][i] and not visited[i]:
+            dfs(i, adj_matrix, visited)
+`;
+
+const dijkstraPython = `# Dijkstra's Algorithm using adjacency matrix
+import heapq
+
+def dijkstra(start, adj_matrix):
+    n = len(adj_matrix)
+    dist = [float('inf')] * n
+    dist[start] = 0
+    pq = [(0, start)]
+    
+    while pq:
+        d, node = heapq.heappop(pq)
+        if d > dist[node]:
+            continue
+        
+        for i in range(n):
+            if adj_matrix[node][i] and dist[node] + adj_matrix[node][i] < dist[i]:
+                dist[i] = dist[node] + adj_matrix[node][i]
+                heapq.heappush(pq, (dist[i], i))
+    return dist
+`;
+
+const aStarPython = `# A* Algorithm using adjacency matrix
+import heapq
+
+def a_star(start, goal, adj_matrix, heuristic):
+    pq = [(0 + heuristic[start], 0, start)]
+    g_score = {i: float('inf') for i in range(len(adj_matrix))}
+    g_score[start] = 0
+    
+    while pq:
+        _, g, node = heapq.heappop(pq)
+        if node == goal:
+            return g_score[goal]
+        
+        for i in range(len(adj_matrix[node])):
+            if adj_matrix[node][i]:
+                tentative_g = g_score[node] + adj_matrix[node][i]
+                if tentative_g < g_score[i]:
+                    g_score[i] = tentative_g
+                    heapq.heappush(pq, (tentative_g + heuristic[i], tentative_g, i))
+    return -1
+`;
+
+const bfsPythonList = `# BFS implementation using adjacency list
+def bfs(start, adj_list):
+    visited = [False] * len(adj_list)
+    queue = [start]
+    visited[start] = True
+    
+    while queue:
+        node = queue.pop(0)
+        print(node, end=" ")
+        
+        for neighbor in adj_list[node]:
+            if not visited[neighbor]:
+                visited[neighbor] = True
+                queue.append(neighbor)
+`;
+
+const dfsPythonList = `# DFS implementation using adjacency list
+def dfs(node, adj_list, visited):
+    visited[node] = True
+    print(node, end=" ")
+    
+    for neighbor in adj_list[node]:
+        if not visited[neighbor]:
+            dfs(neighbor, adj_list, visited)
+`;
 
 export {
     binarySearchPython,
@@ -99,5 +193,11 @@ export {
     bubbleSortPython,
     insertionSortPython,
     selectionSortPython,
-    mergeSortPython
+    mergeSortPython,
+    bfsPython,
+    dfsPython,
+    dijkstraPython,
+    aStarPython,
+    bfsPythonList,
+    dfsPythonList
 };

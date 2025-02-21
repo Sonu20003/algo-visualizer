@@ -105,11 +105,172 @@ void mergeSort(vector<int>& arr, int left, int right) {
 }
 `;
 
+const bfsCpp = `// BFS implementation using adjacency matrix
+#include <iostream>
+#include <vector>
+#include <queue>
+using namespace std;
+
+void bfs(int start, vector<vector<int>>& adjMatrix, vector<bool>& visited) {
+    queue<int> q;
+    q.push(start);
+    visited[start] = true;
+    
+    while (!q.empty()) {
+        int node = q.front();
+        q.pop();
+        cout << node << " ";
+        
+        for (int i = 0; i < adjMatrix[node].size(); i++) {
+            if (adjMatrix[node][i] && !visited[i]) {
+                visited[i] = true;
+                q.push(i);
+            }
+        }
+    }
+}`;
+
+const dfsCpp = `// DFS implementation using adjacency matrix
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void dfs(int node, vector<vector<int>>& adjMatrix, vector<bool>& visited) {
+    visited[node] = true;
+    cout << node << " ";
+    
+    for (int i = 0; i < adjMatrix[node].size(); i++) {
+        if (adjMatrix[node][i] && !visited[i]) {
+            dfs(i, adjMatrix, visited);
+        }
+    }
+}`;
+
+const dijkstraCpp = `// Dijkstra's Algorithm using adjacency matrix
+#include <iostream>
+#include <vector>
+#include <queue>
+using namespace std;
+
+typedef pair<int, int> pii;
+
+vector<int> dijkstra(int start, vector<vector<int>>& adjMatrix, int n) {
+    priority_queue<pii, vector<pii>, greater<pii>> pq;
+    vector<int> dist(n, INT_MAX);
+    
+    pq.push({0, start});
+    dist[start] = 0;
+    
+    while (!pq.empty()) {
+        int d = pq.top().first, node = pq.top().second;
+        pq.pop();
+        
+        if (d > dist[node]) continue;
+        
+        for (int i = 0; i < n; i++) {
+            if (adjMatrix[node][i] && dist[node] + adjMatrix[node][i] < dist[i]) {
+                dist[i] = dist[node] + adjMatrix[node][i];
+                pq.push({dist[i], i});
+            }
+        }
+    }
+    return dist;
+}`;
+
+const aStarCpp = `// A* Algorithm using adjacency matrix
+#include <iostream>
+#include <vector>
+#include <queue>
+using namespace std;
+
+typedef pair<int, int> pii;
+
+struct Node {
+    int id, g, h;
+    bool operator>(const Node& other) const {
+        return (g + h) > (other.g + other.h);
+    }
+};
+
+int aStar(int start, int goal, vector<vector<int>>& adjMatrix, vector<int>& heuristic) {
+    priority_queue<Node, vector<Node>, greater<Node>> pq;
+    vector<int> gScore(adjMatrix.size(), INT_MAX);
+    
+    pq.push({start, 0, heuristic[start]});
+    gScore[start] = 0;
+    
+    while (!pq.empty()) {
+        Node current = pq.top(); pq.pop();
+        
+        if (current.id == goal) return gScore[goal];
+        
+        for (int i = 0; i < adjMatrix[current.id].size(); i++) {
+            if (adjMatrix[current.id][i]) {
+                int tentative_g = gScore[current.id] + adjMatrix[current.id][i];
+                if (tentative_g < gScore[i]) {
+                    gScore[i] = tentative_g;
+                    pq.push({i, tentative_g, heuristic[i]});
+                }
+            }
+        }
+    }
+    return -1;
+}`;
+
+const bfsCppList = `// BFS implementation using adjacency list
+#include <iostream>
+#include <vector>
+#include <queue>
+using namespace std;
+
+void bfs(int start, vector<vector<int>>& adjList, vector<bool>& visited) {
+    queue<int> q;
+    q.push(start);
+    visited[start] = true;
+    
+    while (!q.empty()) {
+        int node = q.front();
+        q.pop();
+        cout << node << " ";
+        
+        for (int neighbor : adjList[node]) {
+            if (!visited[neighbor]) {
+                visited[neighbor] = true;
+                q.push(neighbor);
+            }
+        }
+    }
+}`;
+
+const dfsCppList = `// DFS implementation using adjacency list
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void dfs(int node, vector<vector<int>>& adjList, vector<bool>& visited) {
+    visited[node] = true;
+    cout << node << " ";
+    
+    for (int neighbor : adjList[node]) {
+        if (!visited[neighbor]) {
+            dfs(neighbor, adjList, visited);
+        }
+    }
+}`;
+
+
+
 export {
     binarySearchCpp,
     linearSearchCpp,
     bubbleSortCpp,
     insertionSortCpp,
     selectionSortCpp,
-    mergeSortCpp
+    mergeSortCpp,
+    bfsCpp,
+    dfsCpp,
+    dijkstraCpp,
+    aStarCpp,
+    bfsCppList,
+    dfsCppList
 };

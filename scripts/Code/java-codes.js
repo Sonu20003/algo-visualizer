@@ -92,12 +92,163 @@ private static void merge(int[] arr, int left, int mid, int right) {
 }
 `;
 
+const bfsJava = `// BFS implementation using adjacency matrix in Java
+import java.util.*;
+
+class Graph {
+    public static void bfs(int start, int[][] adjMatrix) {
+        boolean[] visited = new boolean[adjMatrix.length];
+        Queue<Integer> queue = new LinkedList<>();
+        
+        queue.add(start);
+        visited[start] = true;
+        
+        while (!queue.isEmpty()) {
+            int node = queue.poll();
+            System.out.print(node + " ");
+            
+            for (int i = 0; i < adjMatrix[node].length; i++) {
+                if (adjMatrix[node][i] > 0 && !visited[i]) {
+                    visited[i] = true;
+                    queue.add(i);
+                }
+            }
+        }
+    }
+}`;
+
+const dfsJava = `// DFS implementation using adjacency matrix in Java
+import java.util.*;
+
+class Graph {
+    public static void dfs(int node, int[][] adjMatrix, boolean[] visited) {
+        visited[node] = true;
+        System.out.print(node + " ");
+        
+        for (int i = 0; i < adjMatrix[node].length; i++) {
+            if (adjMatrix[node][i] > 0 && !visited[i]) {
+                dfs(i, adjMatrix, visited);
+            }
+        }
+    }
+}`;
+
+const dijkstraJava = `// Dijkstra's Algorithm using adjacency matrix in Java
+import java.util.*;
+
+class Graph {
+    public static int[] dijkstra(int start, int[][] adjMatrix) {
+        int n = adjMatrix.length;
+        int[] dist = new int[n];
+        Arrays.fill(dist, Integer.MAX_VALUE);
+        dist[start] = 0;
+        PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[0]));
+        pq.add(new int[]{0, start});
+        
+        while (!pq.isEmpty()) {
+            int[] top = pq.poll();
+            int d = top[0], node = top[1];
+            
+            if (d > dist[node]) continue;
+            
+            for (int i = 0; i < n; i++) {
+                if (adjMatrix[node][i] > 0 && dist[node] + adjMatrix[node][i] < dist[i]) {
+                    dist[i] = dist[node] + adjMatrix[node][i];
+                    pq.add(new int[]{dist[i], i});
+                }
+            }
+        }
+        return dist;
+    }
+}`;
+
+const aStarJava = `// A* Algorithm using adjacency matrix in Java
+import java.util.*;
+
+class Graph {
+    public static int aStar(int start, int goal, int[][] adjMatrix, int[] heuristic) {
+        PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[0]));
+        int[] gScore = new int[adjMatrix.length];
+        Arrays.fill(gScore, Integer.MAX_VALUE);
+        gScore[start] = 0;
+        
+        pq.add(new int[]{heuristic[start], 0, start});
+        
+        while (!pq.isEmpty()) {
+            int[] top = pq.poll();
+            int _, g, node;
+            _ = top[0]; g = top[1]; node = top[2];
+            
+            if (node == goal) return gScore[goal];
+            
+            for (int i = 0; i < adjMatrix[node].length; i++) {
+                if (adjMatrix[node][i] > 0) {
+                    int tentative_g = gScore[node] + adjMatrix[node][i];
+                    if (tentative_g < gScore[i]) {
+                        gScore[i] = tentative_g;
+                        pq.add(new int[]{tentative_g + heuristic[i], tentative_g, i});
+                    }
+                }
+            }
+        }
+        return -1;
+    }
+}`;
+
+const bfsJavaList = `// BFS implementation using adjacency list in Java
+import java.util.*;
+
+class Graph {
+    public static void bfs(int start, List<List<Integer>> adjList) {
+        boolean[] visited = new boolean[adjList.size()];
+        Queue<Integer> queue = new LinkedList<>();
+        
+        queue.add(start);
+        visited[start] = true;
+        
+        while (!queue.isEmpty()) {
+            int node = queue.poll();
+            System.out.print(node + " ");
+            
+            for (int neighbor : adjList.get(node)) {
+                if (!visited[neighbor]) {
+                    visited[neighbor] = true;
+                    queue.add(neighbor);
+                }
+            }
+        }
+    }
+}`;
+
+const dfsJavaList = `// DFS implementation using adjacency list in Java
+import java.util.*;
+
+class Graph {
+    public static void dfs(int node, List<List<Integer>> adjList, boolean[] visited) {
+        visited[node] = true;
+        System.out.print(node + " ");
+        
+        for (int neighbor : adjList.get(node)) {
+            if (!visited[neighbor]) {
+                dfs(neighbor, adjList, visited);
+            }
+        }
+    }
+}`;
+
+
 export {
     binarySearchJava,
     linearSearchJava,
     bubbleSortJava,
     insertionSortJava,
     selectionSortJava,
-    mergeSortJava
+    mergeSortJava,
+    dfsJava,
+    bfsJava,
+    dijkstraJava,
+    aStarJava,
+    bfsJavaList,
+    dfsJavaList
 };
 

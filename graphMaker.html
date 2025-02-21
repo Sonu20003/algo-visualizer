@@ -16,8 +16,8 @@
         <button onclick="toggleMode('addNode')" id="addNodeBtn">➕ Add Node</button>
         <button onclick="toggleMode('addEdge')" id="addEdgeBtn">🔗 Add Edge</button>
         <button onclick="toggleMode('remove')" id="removeBtn">❌ Remove Node</button>
-        <button onclick="startAlgorithm('bfs')" style="background: #62d51b">🌀 Run BFS</button>
-        <button onclick="startAlgorithm('dfs')" style="background: #f59e0b">🌊 Run DFS</button>
+        <button onclick="startAlgorithm('bfs')" style="background: #62d51b" id="bfs">🌀 Run BFS</button>
+        <button onclick="startAlgorithm('dfs')" style="background: #f59e0b" id="dfs">🌊 Run DFS</button>
         <button onclick="clearGraph()" style="background: transparent">♻️ Clear All</button>
         <div id="status">Status: Ready</div>
     </div>
@@ -53,23 +53,22 @@
 
         <div class="code-blocks">
             <div class="code-block active" id="cpp">
-                <pre><code class="language-cpp"></code></pre>
+                <pre><code class="language-cpp" id="cpp-code"></code></pre>
             </div>
 
             <div class="code-block" id="python">
-                <pre><code class="language-python"></code></pre>
+                <pre><code class="language-python" id="python-code"></code></pre>
             </div>
 
             <div class="code-block" id="java">
-                <pre><code class="language-java"></code></pre>
+                <pre><code class="language-java" id="java-code"></code></pre>
             </div>
         </div>
     </div>
 </div>
+<script type="module" src="scripts/Code/code-updating-scripts/pathFinderEN-code-script.js"></script>
 <script src="scripts/Code/cloudfare-script.js"></script>
 <script src="scripts/Code/code-script.js"></script>
-<script src="scripts/pathFinder(edges&nodes)/pathFinderComputer.js">
-
-</script>
+<script src="scripts/pathFinder(edges&nodes)/pathFinderComputer.js"></script>
 </body>
 </html>
