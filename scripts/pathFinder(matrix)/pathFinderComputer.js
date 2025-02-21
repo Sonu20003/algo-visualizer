@@ -306,6 +306,8 @@ const memory_set = create2DArray(30, block_count);
 
 async function A_star(start, end) {
     return new Promise(async resolve => {
+        //await triggerBlink();
+        //await create_delay(100)
         await computeWeights(endNode, memory_set);
         await create_delay(100);
         const queue = [];
@@ -350,6 +352,25 @@ async function call_aStar(){
     })
 }
 
+async function triggerBlink() {
+    const spans = document.querySelectorAll('#container span');
+
+    await Promise.all(Array.from(spans).map(span => {
+        return new Promise(resolve => {
+            // Force reflow and reset animation
+            void span.offsetHeight;
+
+            span.classList.add('blink');
+
+            // Resolve promise when animation ends
+            const animationEnd = () => {
+                span.classList.remove('blink');
+                resolve();
+            };
+            span.addEventListener('animationend', animationEnd, {once: true});
+        });
+    }));
+}
 
 
 // exports
