@@ -1,4 +1,4 @@
-import {linearSearch, binarySearch} from '../sorting/visualizer.js';
+import {linearSearch, binarySearch} from './search_comp.js';
 
 let algo = null;
 const ls = document.getElementById('Linear_search');

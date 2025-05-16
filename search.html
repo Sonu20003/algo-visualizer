@@ -1,95 +1,109 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visualizer</title>
-    <link rel="stylesheet" href="styles/visualizer.css">
+    <title>Enhanced Search Visualizer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/search-style.css">
     <link rel="stylesheet" href="styles/header.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="styles/code-style.css">
 </head>
 <body>
-
-    <header>
-        <div class="header-blocks" id="title">
-            <p>Algorithms Visualizer !</p>
-        </div>
-
-        <div class="header-blocks dropdown">
-            <button class="display-buttons" id="dropdown-toggle">
-                Algorithms ▼
-            </button>
-            <div id="dropdown-content">
-                <button class="list-buttons" id="Linear_search">Linear Search</button>
-                <button class="list-buttons" id="Binary_search">Binary Search</button>
-
-            </div>
-        </div>
-
-        <div class="header-blocks">
-            <button class="display-buttons" id="visualise">Visualise</button>
-        </div>
-        <div class="header-blocks clear">
-            <button class="display-buttons" id="clear">clear board</button>
-        </div>
-        <div class="header-blocks dropdown">
-            <button class="display-buttons" id="dropdown-toggle-speed">
-                Speed ▼
-            </button>
-            <div id="dropdown-content-speed">
-                <button class="list-buttons" id="slow">Slow</button>
-                <button class="list-buttons" id="average">Average</button>
-                <button class="list-buttons" id="fast">Fast</button>
-                
-            </div>
-        </div>
-        <div class="header-blocks">
-            <button class="display-buttons" id="back">back</button>
-        </div>
-    </header>
-
-    <div id="message-box">
-    </div>
-    <div id="container">
-        
+<header>
+    <div class="header-blocks" id="title">
+        <p>Algorithms Visualizer !</p>
     </div>
 
-    <!--Hidden code container -->
-    <button class="code-floater">View Code</button>
-    <div class="code-modal">
-        <div class="code-content">
-            <div class="code-controls">
-                <button class="copy-btn" onclick="copyCode(this)" id="copy-button">Copy</button>
-                <button onclick="closeCode()" id="close-button">X</button>
+    <div class="header-blocks dropdown">
+        <button class="display-buttons" id="dropdown-toggle">
+            Algorithms ▼
+        </button>
+        <div id="dropdown-content">
+            <button class="list-buttons" id="Linear_search">Linear Search</button>
+            <button class="list-buttons" id="Binary_search">Binary Search</button>
+        </div>
+    </div>
+
+    <div class="header-blocks">
+        <button class="display-buttons" id="visualize">Visualize</button>
+    </div>
+    <div class="header-blocks clear">
+        <button class="display-buttons" id="clear">Clear Board</button>
+    </div>
+    <div class="header-blocks dropdown">
+        <button class="display-buttons" id="dropdown-toggle-speed">
+            Speed ▼
+        </button>
+        <div id="dropdown-content-speed">
+            <button class="list-buttons" id="slow">Slow</button>
+            <button class="list-buttons" id="average">Average</button>
+            <button class="list-buttons" id="fast">Fast</button>
+        </div>
+    </div>
+    <div class="header-blocks">
+        <button class="display-buttons" id="back">Back</button>
+    </div>
+</header>
+
+<div id="message-box">
+    Select an algorithm and click "Visualize" to begin
+</div>
+
+<div class="speed-control">
+    <label for="speed-slider">Animation Speed:</label>
+    <input type="range" id="speed-slider" min="100" max="2000" value="1000" step="100">
+</div>
+
+<div class="controls">
+    <button id="new-array">Generate New Array</button>
+</div>
+
+<div id="container">
+    <div class="array-container" id="array-display"></div>
+    <div id="search-info" class="info-panel"></div>
+</div>
+
+<div class="code-container" id="code-display">
+    <pre><code id="algorithm-code"></code></pre>
+</div>
+<!--Hidden code container -->
+<button class="code-floater">View Code</button>
+<div class="code-modal">
+    <div class="code-content">
+        <div class="code-controls">
+            <button class="copy-btn" onclick="copyCode(this)" id="copy-button">Copy</button>
+            <button onclick="closeCode()" id="close-button">X</button>
+        </div>
+
+        <div class="lang-selector">
+            <button class="lang-btn active" data-lang="cpp">C++</button>
+            <button class="lang-btn" data-lang="python">Python</button>
+            <button class="lang-btn" data-lang="java">Java</button>
+        </div>
+
+        <div class="code-blocks">
+            <div class="code-block active" id="cpp">
+                <pre><code class="language-cpp" id="cpp-code"></code></pre>
             </div>
 
-            <div class="lang-selector">
-                <button class="lang-btn active" data-lang="cpp">C++</button>
-                <button class="lang-btn" data-lang="python">Python</button>
-                <button class="lang-btn" data-lang="java">Java</button>
+            <div class="code-block" id="python">
+                <pre><code class="language-python" id="python-code"></code></pre>
             </div>
 
-            <div class="code-blocks">
-                <div class="code-block active" id="cpp">
-                    <pre><code class="language-cpp" id="cpp-code"></code></pre>
-                </div>
-
-                <div class="code-block" id="python">
-                    <pre><code class="language-python" id="python-code"></code></pre>
-                </div>
-
-                <div class="code-block" id="java">
-                    <pre><code class="language-java" id="java-code"></code></pre>
-                </div>
+            <div class="code-block" id="java">
+                <pre><code class="language-java" id="java-code"></code></pre>
             </div>
         </div>
     </div>
-    <script type="module" src="scripts/Code/code-updating-scripts/search-code-script.js"></script>
-    <script src="scripts/Code/cloudfare-script.js"></script>
-    <script src="scripts/Code/code-script.js"></script>
-    <script type="module" src="scripts/sorting/visualizer.js"></script>
-    <script type="module" src="scripts/search/header_search.js"></script>
+</div>
+
+<script src="scripts/search/search-comp.js"></script>
+<script type="module" src="scripts/Code/code-updating-scripts/search-code-script.js"></script>
+<script src="scripts/Code/cloud-fare-script.js"></script>
+<script src="scripts/Code/code-script.js"></script>
 </body>
 </html>
