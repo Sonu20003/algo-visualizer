@@ -3,29 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Algorithm Visualizer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>Algorithm Visualizer & Network Physics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/index.css">
 </head>
 <body>
+<div id="canvas-container"></div>
+
 <div class="hero-section">
     <div class="hero-content">
-        <h1 class="title">Algorithm Visualizer & Game Physics</h1>
-        <p class="subtitle">Explore and learn algorithms like never before</p>
-        <div class="button-container">
-            <button class="nav-button" id="searching-button">Searching Algorithms</button>
-            <button class="nav-button" id="sorting-button">Sorting Visualization</button>
-            <button class="nav-button" id="matrix-button">Path Finder (Matrix)</button>
-            <button class="nav-button" id="graph-button">Path Finder (Edges & Nodes)</button>
-            <button class="nav-button" id="string-button">String Matching</button>
-            <button class="nav-button" id="adv-button">Advanced Algorithms</button>
+        <h1 class="title">Algorithm & Network Visualizer</h1>
+        <p class="subtitle">Explore algorithms and network simulations in an interactive environment</p>
+
+        <div class="carousel-container">
+            <h2 class="category-title">Algorithm Visualizers</h2>
+            <div class="carousel" id="algo-carousel">
+                <div class="carousel-item algo-card" data-href="search.html">
+                    <h3>Searching Algorithms</h3>
+                </div>
+                <div class="carousel-item algo-card" data-href="sort.html">
+                    <h3>Sorting Visualization</h3>
+                </div>
+                <div class="carousel-item algo-card" data-href="matrixPathFinder.html">
+                    <h3>Path Finder (Matrix)</h3>
+                </div>
+                <div class="carousel-item algo-card" data-href="graphMaker.html">
+                    <h3>Path Finder (Edges & Nodes)</h3>
+                </div>
+                <div class="carousel-item algo-card" data-href="stringMatching.html">
+                    <h3>String Matching</h3>
+                </div>
+                <div class="carousel-item algo-card" data-href="#">
+                    <h3>Advanced Algorithms</h3>
+                </div>
+            </div>
+            <div class="carousel-nav">
+                <button class="prev-btn" data-target="algo-carousel">←</button>
+                <button class="next-btn" data-target="algo-carousel">→</button>
+            </div>
+        </div>
+
+        <div class="carousel-container">
+            <h2 class="category-title">Network Visuals</h2>
+            <div class="carousel" id="network-carousel">
+                <div class="carousel-item network-card" data-href="#">
+                    <h3>Module 1</h3>
+                </div>
+                <div class="carousel-item network-card" data-href="#">
+                    <h3>Module 2</h3>
+                </div>
+                <div class="carousel-item network-card" data-href="#">
+                    <h3>Module 3</h3>
+                </div>
+                <div class="carousel-item network-card" data-href="#">
+                    <h3>Module 4</h3>
+                </div>
+                <div class="carousel-item network-card" data-href="#">
+                    <h3>Module 5</h3>
+                </div>
+            </div>
+            <div class="carousel-nav">
+                <button class="prev-btn" data-target="network-carousel">←</button>
+                <button class="next-btn" data-target="network-carousel">→</button>
+            </div>
         </div>
     </div>
 </div>
-<div class="bouncing-ball"></div>
+
 <footer>
-    <p>© 2025 Algorithm Visualizer | All rights reserved</p>
+    <p>© 2025 Algorithm Visualizer & Network Physics | All rights reserved</p>
 </footer>
-<script src="bundle.js" defer></script>
+
+<script src="bundle.js"></script>
 </body>
 </html>

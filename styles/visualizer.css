@@ -91,7 +91,7 @@ body{
 
 .myTextarea {
     position: absolute;
-    left: 135px; 
+    left: 135px;
     top: 350px;
     width: 300px;
     height: 60px;
@@ -119,13 +119,13 @@ body{
     0%{transform:translate3d(0px, 0px, 0px);}
     33%{transform: translate3d(0px, 30px, 0px);}
     66%{transform: translate3d(calc(-1 * var(--swapDist)), 30px, 0px);}
-    100%{transform: translate3d(calc(-1 * var(--swapDist)), 0px, 0px);}  
+    100%{transform: translate3d(calc(-1 * var(--swapDist)), 0px, 0px);}
 }
 @keyframes slideInRight{
     0%{transform:translate3d(0px, 0px, 0px)}
     33%{transform: translate3d(0px, -30px, 0px);}
     66%{transform: translate3d(var(--swapDist), -30px, 0px);}
-    100%{transform: translate3d(var(--swapDist), 0px, 0px);}  
+    100%{transform: translate3d(var(--swapDist), 0px, 0px);}
 }
 @keyframes dragDown{
     0%{transform:translate3d(0px, 0px, 0px);}
@@ -159,28 +159,28 @@ body{
 @keyframes RGBborder {
     0% { border-color: rgb(255, 0, 0); }
     10% { border-color: rgb(218, 53, 3); }
-    30% { border-color: rgb(181, 248, 39); } 
-    40% { border-color: rgb(0, 255, 0); } 
-    60% { border-color: rgb(0, 217, 255); } 
-    80% { border-color: rgb(34, 0, 255); } 
-    100% { border-color: rgb(255, 0, 183); } 
+    30% { border-color: rgb(181, 248, 39); }
+    40% { border-color: rgb(0, 255, 0); }
+    60% { border-color: rgb(0, 217, 255); }
+    80% { border-color: rgb(34, 0, 255); }
+    100% { border-color: rgb(255, 0, 183); }
 }
 @keyframes RGB {
-    0% { box-shadow: 0 0 10px rgb(255, 0, 0); } 
-10% { box-shadow: 0 0 20px rgb(255, 69, 0); } 
-20% { box-shadow: 0 0 30px rgb(255, 165, 0); } 
-30% { box-shadow: 0 0 40px rgb(255, 255, 0); } 
-40% { box-shadow: 0 0 45px rgb(173, 255, 47); } 
-50% { box-shadow: 0 0 50px rgb(0, 255, 0); } 
-60% { box-shadow: 0 0 55px rgb(0, 255, 255); } 
-70% { box-shadow: 0 0 60px rgb(30, 144, 255); } 
-80% { box-shadow: 0 0 65px rgb(0, 0, 255); } 
-90% { box-shadow: 0 0 70px rgb(138, 43, 226); } 
-100% { box-shadow: 0 0 75px rgb(255, 0, 255); } 
+    0% { box-shadow: 0 0 10px rgb(255, 0, 0); }
+10% { box-shadow: 0 0 20px rgb(255, 69, 0); }
+20% { box-shadow: 0 0 30px rgb(255, 165, 0); }
+30% { box-shadow: 0 0 40px rgb(255, 255, 0); }
+40% { box-shadow: 0 0 45px rgb(173, 255, 47); }
+50% { box-shadow: 0 0 50px rgb(0, 255, 0); }
+60% { box-shadow: 0 0 55px rgb(0, 255, 255); }
+70% { box-shadow: 0 0 60px rgb(30, 144, 255); }
+80% { box-shadow: 0 0 65px rgb(0, 0, 255); }
+90% { box-shadow: 0 0 70px rgb(138, 43, 226); }
+100% { box-shadow: 0 0 75px rgb(255, 0, 255); }
 }
 @keyframes mergeRestingPlace {
     0%{transform: translate3d(0px, 0px, 0px);}
-    
+
     100%{transform: translate3d(var(--mergeSlide), -140px, 0px);}
 }
 
@@ -192,7 +192,7 @@ body{
         animation-direction: normal;
         animation-fill-mode: none;
     `*/
-    
+
 
 /*UTILITY CLASSES*/
 
@@ -240,7 +240,7 @@ body{
     background-color: #3498db;
     margin: 0 2px;
     transition: height 0.3s;
-    
+
 }
 
 .sorted {
@@ -251,7 +251,3 @@ body{
     content: attr(data-content);
     animation: mergeRestingPlace 2s ease-in-out forwards;
 }
-
-
-
-
