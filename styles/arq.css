@@ -1,0 +1,403 @@
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --error-color: #e74c3c;
+    --background-color: #f5f5f5;
+    --card-bg: #ffffff;
+    --text-color: #333333;
+    --border-color: #dddddd;
+    --sender-color: #3498db;
+    --receiver-color: #2ecc71;
+    --packet-color: #f39c12;
+    --ack-color: #9b59b6;
+    --lost-color: #e74c3c;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--primary-color);
+}
+
+.protocol-selector {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.protocol-btn {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 2px solid var(--border-color);
+}
+
+.protocol-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.control-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.control-btn:hover {
+    background-color: #2980b9;
+}
+
+.settings {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.setting-group {
+    display: flex;
+    align-items: center;
+}
+
+.setting-group label {
+    margin-right: 10px;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+}
+
+select, input {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+}
+
+.protocol-info {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.protocol-title {
+    color: var(--primary-color);
+    margin-top: 0;
+}
+
+.visualization-container {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 10px;
+    height: 500px;
+    position: relative;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.sender, .receiver {
+    width: 120px;
+    height: 180px;
+    background-color: var(--card-bg);
+    border: 2px solid;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sender {
+    left: 100px;
+    top: 80px;
+    border-color: var(--sender-color);
+}
+
+.receiver {
+    right: 100px;
+    top: 80px;
+    border-color: var(--receiver-color);
+}
+
+.device-title {
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 2px solid;
+}
+
+.sender .device-title {
+    background-color: var(--sender-color);
+    color: white;
+    border-color: var(--sender-color);
+    border-radius: 8px 8px 0 0;
+}
+
+.receiver .device-title {
+    background-color: var(--receiver-color);
+    color: white;
+    border-color: var(--receiver-color);
+    border-radius: 8px 8px 0 0;
+}
+
+.window-container {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.window-title {
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.window {
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+    height: 30px;
+    margin-bottom: 10px;
+}
+
+.window-slot {
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    position: relative;
+}
+
+.window-slot.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.buffer-title {
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.buffer {
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+    height: 20px;
+}
+
+.buffer-slot {
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+}
+
+.buffer-slot.sent {
+    background-color: var(--packet-color);
+    color: white;
+}
+
+.buffer-slot.acked {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.packet {
+    width: 30px;
+    height: 20px;
+    position: absolute;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    transition: opacity 0.3s;
+}
+
+.data-packet {
+    background-color: var(--packet-color);
+    color: white;
+}
+
+.ack-packet {
+    background-color: var(--ack-color);
+    color: white;
+}
+
+.protocol-sequence {
+    position: absolute;
+    top: 300px;
+    left: 0;
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+}
+
+.sequence-diagram {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.timeline-sender, .timeline-receiver {
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    background-color: var(--border-color);
+    top: 0;
+}
+
+.timeline-sender {
+    left: 150px;
+}
+
+.timeline-receiver {
+    right: 150px;
+}
+
+.sequence-event {
+    position: absolute;
+    height: 2px;
+    background-color: var(--packet-color);
+    z-index: 5;
+}
+
+.event-label {
+    position: absolute;
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+.log-container {
+    margin-top: 20px;
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.log-entry {
+    margin-bottom: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    font-family: monospace;
+}
+
+.log-entry.info {
+    background-color: #f0f7ff;
+}
+
+.log-entry.error {
+    background-color: #ffefef;
+    color: var(--error-color);
+}
+
+.log-entry.success {
+    background-color: #efffef;
+    color: var(--secondary-color);
+}
+
+.animation-speed-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.legend {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.legend-color {
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+    border-radius: 3px;
+}
+
+.lost-animation {
+    animation: lostPacket 0.5s forwards;
+}
+
+@keyframes lostPacket {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(0.2);
+        opacity: 0;
+        background-color: var(--lost-color);
+    }
+}
+
+@media (max-width: 768px) {
+    .sender {
+        left: 50px;
+    }
+    .receiver {
+        right: 50px;
+    }
+    .timeline-sender {
+        left: 100px;
+    }
+    .timeline-receiver {
+        right: 100px;
+    }
+}
