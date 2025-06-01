@@ -1,0 +1,318 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap');
+
+body {
+    margin: 0;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1c1c2c, #0a0a1a);
+    font-family: 'Share Tech Mono', monospace;
+    color: #e0e0e0;
+}
+
+#map {
+    width: 100vw;
+    height: 100vh;
+    background:
+            repeating-linear-gradient(0deg, rgba(30, 30, 50, 0.5) 0, rgba(30, 30, 50, 0.5) 1px, transparent 1px, transparent 30px),
+            repeating-linear-gradient(90deg, rgba(30, 30, 50, 0.5) 0, rgba(30, 30, 50, 0.5) 1px, transparent 1px, transparent 30px);
+    background-size: 30px 30px;
+    position: relative;
+    cursor: grab; /* Indicates drag capability */
+}
+
+#map.dragging {
+    cursor: grabbing;
+}
+
+.node {
+    position: absolute;
+    width: 60px; /* Slightly larger nodes */
+    height: 60px;
+    border-radius: 50%;
+    cursor: grab;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2em; /* Larger text */
+    text-shadow: 0 0 8px rgba(255,255,255,0.7); /* More prominent text shadow */
+    transition: transform 0.2s ease-out, box-shadow 0.3s ease; /* Smooth transitions */
+    z-index: 2;
+    border: 2px solid rgba(255,255,255,0.3); /* Subtle border */
+}
+
+.node:hover {
+    transform: scale(1.1); /* Hover effect */
+    box-shadow: 0 0 35px rgba(255,255,255,0.8);
+}
+
+.node.active {
+    box-shadow: 0 0 40px #00e6e6, 0 0 20px #00e6e6 inset; /* Glow for active elements */
+    border-color: #00e6e6;
+}
+
+.sender {
+    background: linear-gradient(45deg, #00e676, #3dff99); /* Brighter green */
+    box-shadow: 0 0 30px #00e676;
+}
+
+.receiver {
+    background: linear-gradient(45deg, #ff1744, #ff6b81); /* Brighter red */
+    box-shadow: 0 0 30px #ff1744;
+    cursor: pointer;
+}
+
+.router {
+    width: 45px; /* Slightly larger routers */
+    height: 45px;
+    border-radius: 10px; /* Square with rounded corners */
+    background: linear-gradient(45deg, #5c5c5c, #8a8a8a);
+    box-shadow: 0 0 20px #a0a0a0;
+    font-size: 1em;
+}
+
+.control-panel, .settings-panel, .status-panel, .protocol-panel {
+    position: fixed;
+    background: rgba(10, 10, 20, 0.95); /* Darker, more opaque panels */
+    padding: 20px;
+    border-radius: 12px;
+    color: #e0e0e0;
+    z-index: 1000;
+    box-shadow: 0 0 25px rgba(0,255,255,0.3); /* Cyan glow for panels */
+    border: 1px solid rgba(0,255,255,0.1);
+    backdrop-filter: blur(5px); /* Subtle blur effect */
+}
+
+.control-panel { top: 20px; left: 20px; width: 280px; }
+.settings-panel { top: 20px; right: 20px; width: 280px; }
+.status-panel { bottom: 20px; left: 20px; width: 280px; }
+.protocol-panel { bottom: 20px; right: 20px; width: 280px; max-height: 250px; overflow-y: auto; }
+
+h3 {
+    color: #00e6e6; /* Cyan heading */
+    margin-top: 0;
+    border-bottom: 1px solid rgba(0,255,255,0.2);
+    padding-bottom: 10px;
+    font-family: 'Orbitron', sans-serif; /* Stylish heading font */
+}
+
+button {
+    background: #007bff; /* Blue button */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 8px 5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,123,255,0.4);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1em;
+    display: inline-block;
+}
+
+button:hover {
+    background: #0056b3; /* Darker blue on hover */
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(0,123,255,0.6);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(0,123,255,0.4);
+}
+
+.packet {
+    position: absolute;
+    width: 18px; /* Slightly larger packets */
+    height: 18px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 5; /* Higher z-index for packets */
+    box-shadow: 0 0 10px rgba(255,255,255,0.8);
+    filter: brightness(1.2); /* Make packets glow */
+}
+
+.path-line {
+    position: absolute;
+    height: 3px; /* Thicker lines */
+    transform-origin: left center;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.path-line.active-path {
+    opacity: 1;
+    box-shadow: 0 0 10px rgba(0,255,255,0.8);
+}
+
+.slider-container {
+    margin: 15px 0;
+}
+
+.slider-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.95em;
+    color: #b0b0b0;
+}
+
+.slider {
+    width: 100%;
+    -webkit-appearance: none;
+    height: 8px;
+    background: #3a3a5a;
+    outline: none;
+    border-radius: 5px;
+    opacity: 0.8;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #00e6e6;
+    cursor: pointer;
+    box-shadow: 0 0 10px #00e6e6;
+}
+
+.slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #00e6e6;
+    cursor: pointer;
+    box-shadow: 0 0 10px #00e6e6;
+}
+
+select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    background: #3a3a5a;
+    color: #e0e0e0;
+    border: 1px solid #00e6e6;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.95em;
+}
+
+.status-item {
+    margin-bottom: 8px;
+    color: #b0b0b0;
+    font-size: 0.95em;
+}
+
+.status-item span {
+    color: #00e6e6;
+    font-weight: bold;
+}
+
+.protocol-log {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    color: #0f0; /* Green for logs */
+    margin-top: 10px;
+    line-height: 1.4;
+    white-space: pre-wrap; /* Preserve formatting */
+    word-break: break-all;
+}
+
+.tooltip {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.9);
+    color: #00e6e6; /* Cyan tooltip text */
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 13px;
+    z-index: 1000;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    transform: translateY(10px); /* Initial offset for animation */
+    border: 1px solid rgba(0,255,255,0.3);
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.tooltip.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.notification {
+    position: absolute;
+    background: rgba(255, 69, 0, 0.9); /* Orange-red for notifications */
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 1000;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    box-shadow: 0 0 20px rgba(255, 69, 0, 0.6);
+    border: 1px solid rgba(255, 69, 0, 0.3);
+    font-family: 'Orbitron', sans-serif;
+}
+
+.notification.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.node-label {
+    position: absolute;
+    font-size: 0.8em; /* Smaller label */
+    color: #a0a0a0;
+    top: -16px; /* Adjust position */
+    width: 100%;
+    text-align: center;
+    pointer-events: none; /* Do not block clicks */
+}
+
+.congestion {
+    animation: pulse 1s infinite alternate, glowRed 1s infinite alternate; /* More pronounced congestion */
+    border-color: #ff0000 !important;
+    box-shadow: 0 0 20px #ff0000, 0 0 10px #ff0000 inset !important;
+}
+
+@keyframes pulse {
+    from { opacity: 0.8; }
+    to { opacity: 1; }
+}
+
+@keyframes glowRed {
+    from { box-shadow: 0 0 20px rgba(255,0,0,0.4); }
+    to { box-shadow: 0 0 40px rgba(255,0,0,0.8); }
+}
+
+/* Packet specific animations */
+.packet-lost {
+    animation: fadeOutSpin 0.5s forwards;
+    background-color: #ff4444 !important;
+    box-shadow: 0 0 15px #ff4444 !important;
+}
+
+@keyframes fadeOutSpin {
+    0% { transform: scale(1) rotate(0deg); opacity: 1; }
+    100% { transform: scale(0) rotate(360deg); opacity: 0; }
+}
+
+.packet-received {
+    animation: packetAbsorb 0.3s forwards;
+}
+
+@keyframes packetAbsorb {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(0.1); opacity: 0; }
+}
