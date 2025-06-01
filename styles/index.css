@@ -3,24 +3,26 @@ body, html {
     padding: 0;
     font-family: 'Poppins', sans-serif;
     box-sizing: border-box;
-    background: #0a0e1a;
+    background: #0a0e1a; /* Deeper, less vibrant dark blue */
     color: #ffffff;
     overflow-x: hidden;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
 }
 
+/* Hide Scrollbar for Webkit browsers */
 ::-webkit-scrollbar {
     display: none;
 }
 
+/* Hero Section */
 .hero-section {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background: linear-gradient(-45deg, #1a0b2e, #000428, #004e92, #0a2463);
+    background: linear-gradient(-45deg, #0f0a1c, #0d0a2a, #0b1d3d, #092e4e); /* More subdued, deeper blues/purples */
     background-size: 400% 400%;
     animation: gradientShift 15s ease infinite;
     text-align: center;
@@ -36,24 +38,26 @@ body, html {
 
 .hero-content {
     position: relative;
-    max-width: 1000px;
+    max-width: 1100px; /* Slightly wider for carousels */
     z-index: 5;
-    padding: 2rem;
+    padding: 2.5rem 3rem; /* More padding */
     border-radius: 20px;
-    background: rgba(10, 14, 26, 0.4);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(10, 14, 26, 0.5); /* Slightly more opaque for content focus */
+    backdrop-filter: blur(12px); /* Slightly stronger blur */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4); /* Enhanced shadow */
+    border: 1px solid rgba(255, 255, 255, 0.15); /* Slightly more prominent border */
 }
 
+/* Titles and Subtitle */
 .title {
-    font-size: 4rem;
+    font-size: 4.2rem; /* Slightly larger */
     font-weight: 700;
-    letter-spacing: -1.5px;
+    letter-spacing: -2px; /* Tighter letter spacing */
     margin-bottom: 1.5rem;
     transform: translateY(20px);
+    opacity: 0; /* Start hidden for animation */
     animation: floatTitle 1s ease-out forwards;
-    background: linear-gradient(45deg, #fff 0%, #e6e6ff 100%);
+    background: linear-gradient(45deg, #e0e0e0 0%, #ffffff 100%); /* Brighter white for text */
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -64,61 +68,79 @@ body, html {
 }
 
 .subtitle {
-    font-size: 1.5rem;
-    margin: 2rem 0;
+    font-size: 1.6rem; /* Slightly larger */
+    margin: 2rem auto; /* Center subtitle */
+    max-width: 700px; /* Constrain width */
     color: rgba(255, 255, 255, 0.9);
     font-weight: 300;
     opacity: 0;
-    animation: fadeInUp 1s 0.3s ease-out forwards;
+    animation: fadeInUp 1s 0.4s ease-out forwards; /* Slightly delayed */
 }
 
 @keyframes fadeInUp {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Carousel Styles */
+/* Carousel Containers */
 .carousel-container {
-    margin-top: 3rem;
+    margin-top: 3.5rem; /* More space between sections */
     width: 100%;
     overflow: hidden;
     position: relative;
     opacity: 0;
-    animation: fadeIn 1s 0.6s ease-out forwards;
+    animation: fadeIn 1s 0.8s ease-out forwards; /* Further delayed */
 }
 
 @keyframes fadeIn {
     to { opacity: 1; }
 }
 
+.category-title {
+    text-align: left;
+    margin: 2.5rem 10px 1.2rem; /* Adjusted margin for consistency */
+    font-size: 1.5rem; /* Slightly larger */
+    font-weight: 600;
+    color: #ffffff;
+    opacity: 0.95;
+    text-transform: uppercase;
+    letter-spacing: 1.5px; /* More prominent letter spacing */
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1); /* Subtle separator */
+    padding-bottom: 0.5rem;
+}
+
+/* Carousel Itself */
 .carousel {
     display: flex;
     transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
-    gap: 4px;
+    gap: 20px; /* Increased gap between items */
     padding: 10px 0;
     position: relative;
+    justify-content: flex-start; /* Align items to the start */
+    padding-bottom: 20px; /* Space for shadow */
 }
 
+/* Carousel Item Cards */
 .carousel-item {
-    min-width: 280px;
-    height: 150px;
+    min-width: 300px; /* Slightly wider cards */
+    height: 160px; /* Slightly taller cards */
     border-radius: 15px;
-    margin: 0 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     flex-shrink: 0;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
+    background: rgba(255, 255, 255, 0.08); /* Slightly less opaque */
+    backdrop-filter: blur(8px); /* Stronger blur */
     border: 1px solid rgba(255, 255, 255, 0.1);
     overflow: hidden;
     position: relative;
     transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Initial subtle shadow */
 }
 
 .carousel-item:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    transform: translateY(-12px); /* Increased lift */
+    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.4); /* More pronounced shadow on hover */
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
@@ -129,97 +151,141 @@ body, html {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0)); /* More subtle overlay */
     z-index: 1;
 }
 
 .carousel-item h3 {
-    font-size: 1.2rem;
+    font-size: 1.3rem; /* Slightly larger font */
     font-weight: 600;
-    color: white;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    color: #fff;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6); /* Stronger text shadow */
     position: relative;
     z-index: 2;
 }
 
+/* Carousel Navigation Buttons */
 .carousel-nav {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
-    gap: 10px;
+    margin-top: 25px; /* More space from carousel */
+    gap: 15px; /* Increased gap between buttons */
 }
 
 .carousel-nav button {
-    width: 40px;
-    height: 40px;
+    width: 45px; /* Slightly larger buttons */
+    height: 45px;
     border-radius: 50%;
     border: none;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.15); /* Slightly less opaque */
     color: white;
-    font-size: 1.2rem;
+    font-size: 1.4rem; /* Larger arrow icon */
     cursor: pointer;
     transition: all 0.3s ease;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle button shadow */
 }
 
 .carousel-nav button:hover {
-    background: rgba(255, 255, 255, 0.4);
-    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.3); /* More opaque on hover */
+    transform: scale(1.15); /* More pronounced scale */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
-.category-title {
-    text-align: left;
-    margin: 2rem 0 1rem;
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: #fff;
-    opacity: 0.9;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+/* Specific Carousel Item Backgrounds (slightly adjusted colors) */
+.algo-card {
+    background: linear-gradient(135deg, #4a69bd, #744ace); /* Deeper blues/purples */
 }
 
+.network-card {
+    background: linear-gradient(135deg, #1abc9c, #27ae60); /* More muted greens */
+}
+
+/* Footer */
 footer {
     text-align: center;
-    padding: 2rem 0;
-    background: rgba(10, 14, 26, 0.95);
+    padding: 1.5rem 0; /* Slightly less padding */
+    background: rgba(10, 14, 26, 0.9); /* Slightly less opaque */
     backdrop-filter: blur(5px);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 0.9rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08); /* More subtle border */
+    font-size: 0.85rem; /* Slightly smaller font */
+    color: rgba(255, 255, 255, 0.7); /* Lighter color */
     position: relative;
     z-index: 5;
 }
 
+/* Canvas for Particles */
 #canvas-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
-    pointer-events: none;
+    z-index: 1; /* Below hero content */
+    pointer-events: none; /* Allow interaction with content */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .hero-content {
+        padding: 2rem;
+    }
+    .title {
+        font-size: 3.5rem;
+    }
+    .subtitle {
+        font-size: 1.3rem;
+    }
+    .carousel-item {
+        min-width: 260px;
+        height: 140px;
+    }
+    .category-title {
+        font-size: 1.3rem;
+    }
 }
 
 @media (max-width: 768px) {
     .title {
-        font-size: 2.5rem;
+        font-size: 2.8rem;
         line-height: 1.2;
     }
-
     .subtitle {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
-
     .carousel-item {
-        min-width: 240px;
-        height: 120px;
+        min-width: 220px;
+        height: 110px;
+        margin: 0 8px;
+    }
+    .carousel-nav button {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+    .category-title {
+        font-size: 1.2rem;
     }
 }
 
-/* Carousel item backgrounds */
-.algo-card {
-    background: linear-gradient(135deg, #3498db, #9b59b6);
-}
-
-.network-card {
-    background: linear-gradient(135deg, #16a085, #2ecc71);
+@media (max-width: 480px) {
+    .hero-content {
+        padding: 1.5rem;
+    }
+    .title {
+        font-size: 2rem;
+    }
+    .subtitle {
+        font-size: 0.9rem;
+    }
+    .carousel-item {
+        min-width: 180px;
+        height: 100px;
+    }
+    .carousel-item h3 {
+        font-size: 1rem;
+    }
+    .category-title {
+        font-size: 1rem;
+    }
 }

@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Carousel functionality
     const carouselConfig = {
-        slideTime: 3000,
-        transitionSpeed: 0.6, // in seconds
-        slideDistance: 300
+        slideTime: 3500, // Slightly longer slide time for less "chaotic" feel
+        transitionSpeed: 0.7, // Slightly slower transition
+        slideDistance: 320 // Adjusted to new card width + gap
     };
 
     class Carousel {
@@ -18,19 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
             this.isPaused = false;
             this.isTransitioning = false;
 
-            // Clone items for infinite scrolling
             this.setupClones();
-
-            // Calculate dimensions
             this.updateDimensions();
-
-            // Set initial position
             this.setInitialPosition();
-
-            // Set up event listeners
             this.setupEventListeners();
-
-            // Start autoplay
             this.startAutoplay();
         }
 
@@ -40,45 +31,37 @@ document.addEventListener('DOMContentLoaded', () => {
                 const clone = item.cloneNode(true);
                 this.carousel.appendChild(clone);
             });
-
-            // We now have duplicates of all items
             this.allItems = Array.from(this.carousel.querySelectorAll('.carousel-item'));
         }
 
         updateDimensions() {
-            // Get item dimensions including margins
             const firstItem = this.allItems[0];
+            if (!firstItem) return; // Prevent error if no items
+
             const style = window.getComputedStyle(firstItem);
             const marginRight = parseInt(style.marginRight) || 0;
             const marginLeft = parseInt(style.marginLeft) || 0;
+            const gap = parseInt(window.getComputedStyle(this.carousel).gap) || 0;
 
-            this.itemWidth = firstItem.offsetWidth + marginLeft + marginRight;
+            this.itemWidth = firstItem.offsetWidth + marginLeft + marginRight + gap;
             this.containerWidth = this.carousel.parentElement.offsetWidth;
-
-            // Number of items visible at once
             this.visibleItems = Math.floor(this.containerWidth / this.itemWidth);
         }
 
         setInitialPosition() {
-            // Position at first item (not clone)
             this.carousel.style.transform = `translateX(0px)`;
         }
 
         setupEventListeners() {
-            // Mouse hover pause
             this.carousel.addEventListener('mouseenter', () => {
                 this.isPaused = true;
             });
-
             this.carousel.addEventListener('mouseleave', () => {
                 this.isPaused = false;
             });
 
-            // Handle transition end
             this.carousel.addEventListener('transitionend', () => {
                 this.isTransitioning = false;
-
-                // If we've gone past the end or beginning, reset position without animation
                 if (this.currentIndex >= this.totalOriginalItems) {
                     this.resetToStart();
                 } else if (this.currentIndex < 0) {
@@ -86,10 +69,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // Window resize
             window.addEventListener('resize', () => {
                 this.updateDimensions();
-                this.updatePosition(false); // Update position without animation
+                this.updatePosition(false);
             });
         }
 
@@ -107,41 +89,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
         next() {
             if (this.isTransitioning) return;
-
             this.currentIndex++;
             this.updatePosition(true);
         }
 
         prev() {
             if (this.isTransitioning) return;
-
             this.currentIndex--;
             this.updatePosition(true);
         }
 
         resetToStart() {
-            // Reset to first item without animation
             this.carousel.style.transition = 'none';
             this.currentIndex = 0;
             this.updatePosition(false);
-
-            // Force reflow to apply the style
-            this.carousel.offsetHeight;
-
-            // Restore transition
+            this.carousel.offsetHeight; // Force reflow
             this.carousel.style.transition = `transform ${this.config.transitionSpeed}s cubic-bezier(0.25, 0.1, 0.25, 1)`;
         }
 
         resetToEnd() {
-            // Reset to last original item without animation
             this.carousel.style.transition = 'none';
             this.currentIndex = this.totalOriginalItems - 1;
             this.updatePosition(false);
-
-            // Force reflow to apply the style
-            this.carousel.offsetHeight;
-
-            // Restore transition
+            this.carousel.offsetHeight; // Force reflow
             this.carousel.style.transition = `transform ${this.config.transitionSpeed}s cubic-bezier(0.25, 0.1, 0.25, 1)`;
         }
 
@@ -152,7 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 this.carousel.style.transition = 'none';
             }
-
             const position = -(this.currentIndex * this.itemWidth);
             this.carousel.style.transform = `translateX(${position}px)`;
         }
@@ -205,10 +174,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('canvas-container').appendChild(canvas);
     const ctx = canvas.getContext('2d');
 
-    // Particle system
     const particles = [];
-    const particleCount = 100;
-    const connectionDistance = 150;
+    const particleCount = 70; // Reduced particle count for less chaos
+    const connectionDistance = 120; // Slightly reduced connection distance
     const mouseRadius = 150;
 
     let mouse = {
@@ -233,19 +201,17 @@ document.addEventListener('DOMContentLoaded', () => {
         init();
     });
 
-    // Particle class
     class Particle {
         constructor() {
             this.x = Math.random() * canvas.width;
             this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 3 + 1;
-            this.velocityX = (Math.random() - 0.5) * 2;
-            this.velocityY = (Math.random() - 0.5) * 2;
-            this.color = `hsla(${Math.random() * 60 + 200}, 100%, 70%, 0.8)`;
+            this.size = Math.random() * 2 + 1; // Slightly smaller particles
+            this.velocityX = (Math.random() - 0.5) * 1.5; // Slightly slower movement
+            this.velocityY = (Math.random() - 0.5) * 1.5;
+            this.color = `hsla(${Math.random() * 60 + 200}, 100%, 75%, 0.7)`; // Brighter, less saturated blue/purple
         }
 
         update() {
-            // Move particles
             this.x += this.velocityX;
             this.y += this.velocityY;
 
@@ -260,8 +226,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     const forceDirectionY = dy / distance;
                     const force = (mouse.radius - distance) / mouse.radius;
 
-                    const directionX = forceDirectionX * force * 5;
-                    const directionY = forceDirectionY * force * 5;
+                    const directionX = forceDirectionX * force * 3; // Reduced repulsion force
+                    const directionY = forceDirectionY * force * 3;
 
                     this.velocityX -= directionX;
                     this.velocityY -= directionY;
@@ -276,7 +242,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.velocityY = -this.velocityY;
             }
 
-            // Keep particles in bounds
             this.x = Math.max(0, Math.min(this.x, canvas.width));
             this.y = Math.max(0, Math.min(this.y, canvas.height));
         }
@@ -305,8 +270,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (distance < connectionDistance) {
                     const opacity = 1 - (distance / connectionDistance);
-                    ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.5})`;
-                    ctx.lineWidth = 1;
+                    ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.3})`; // Less intense lines
+                    ctx.lineWidth = 0.8; // Thinner lines
                     ctx.beginPath();
                     ctx.moveTo(particles[i].x, particles[i].y);
                     ctx.lineTo(particles[j].x, particles[j].y);
